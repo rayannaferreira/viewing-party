@@ -112,6 +112,26 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 
+def get_available_recs(user_data):
+    #create an empty list for movie recomandation
+    recommendations = []
+
+    #go through each friend in the user's friend list
+    for friend in user_data["friends"]:
+
+        #go through each movie this friend watched
+        for movie in friend ["watched"]:
+
+            #check that the user has not watched this movie
+            if movie not in user_data["watched"]:
+                #check user has acsess to streaming 
+                if movie["host"] in user_data["subscriptions"]:
+
+                    #check if movie is not already in recomandation
+                    if movie not in recommendations:
+                        #add movie to recomendation list
+                        recommendations.append(movie)
+    return recommendations
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
