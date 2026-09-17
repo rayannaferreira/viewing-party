@@ -74,7 +74,6 @@ def get_most_watched_genre(user_data):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 
-# ---------------- WAVE 3 ----------------
 
 def get_unique_watched(user_data):
     friends_titles = set()
@@ -135,6 +134,7 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
 def get_new_rec_by_genre(user_data):
 
     #get_the genre user watches most ofter
@@ -163,6 +163,7 @@ def get_new_rec_by_genre(user_data):
                         #add movie to recomendation
                         recommendations.append(movie)
     return recommendations
+
 
 #favorite movie + none of friend watched it = recommendation
 def get_rec_from_favorites(user_data):
