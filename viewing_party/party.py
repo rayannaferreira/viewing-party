@@ -135,4 +135,53 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
 
+    #get_the genre user watches most ofter
+    most_watched_genre = get_most_watched_genre(user_data)
+
+    #empty list for recomendation
+    recommendations = []
+
+    #if user has not watched any movies, return empty list
+    if most_watched_genre is None:
+        return recommendations
+
+
+    #go through each friend
+    for friend in user_data["friends"]:
+
+        #go through each movie friend watched
+        for movie in friend['watched']:
+
+            #chech if the movie has user's most watched genre
+            if movie["genre"] == most_watched_genre:
+                #check if user has not watched movie eyt
+                if movie not in user_data["watched"]:
+                    #check if movie is not in recommendations already
+                    if movie not in recommendations:
+                        #add movie to recomendation
+                        recommendations.append(movie)
+    return recommendations
+
+#favorite movie + none of friend watched it = recommendation
+def get_rec_from_favorites(user_data):
+    #make an empty list for recomandation
+    recommendations = []
+
+    #check each favorite movie
+    for movie in user_data["favorites"]:
+        #start by thinking no friend watched it
+        watched_by_friend = False
+
+        #check each friend
+        for friend in user_data["friends"]:
+            #if friend watched this movie
+            if movie in friend["watched"]:
+                watched_by_friend = True
+
+        #if no friend watched it, add it
+        if watched_by_friend == False:
+            recommendations.append(movie)
+    #return final list
+    return recommendations
